@@ -1,0 +1,67 @@
+﻿@model MyBlog.Models.Registration
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+@*add the enctype attribut to the for tag, using the value multipart/form-data*@
+<form action="~/Account/Register" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Registration</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PasswordConfirm)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PasswordConfirm)
+            @Html.ValidationMessageFor(model => model.PasswordConfirm)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Image)
+        </div>
+        <div class="editor-field">
+           @* when doing an upload use the following syntax*@
+            <input type="file" name="Image" id="Image" />
+            @Html.ValidationMessageFor(model => model.Image)
+        </div>
+
+        <p>
+            <input type="submit" value="Register" />
+        </p>
+    </fieldset>
+
+</form>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
