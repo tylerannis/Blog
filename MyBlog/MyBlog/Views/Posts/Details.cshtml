@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<fieldset>
-    <legend>Post</legend>
+
+<fieldset class="details">
+    <legend>Post Details</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Title)
@@ -53,5 +53,4 @@
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PostID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+ </p>

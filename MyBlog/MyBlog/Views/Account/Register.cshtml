@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
+
 @*add the enctype attribut to the for tag, using the value multipart/form-data*@
 <form action="~/Account/Register" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()

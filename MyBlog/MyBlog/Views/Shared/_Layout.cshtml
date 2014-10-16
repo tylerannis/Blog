@@ -8,12 +8,13 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <header>My BlogEntities</header>
+    <header><a href="@Url.Action("Index", "Home")"> My Blog about Life</a></header>
+    <br />
     
     @if (Request.IsAuthenticated)
     {
-        <div>Hello, @User.Identity.Name &nbsp|&nbsp <a href="@Url.Action("Logout","Account")">Log Out</a>
-            &nbsp|&nbsp <a href="@Url.Action("Index", "Post")">Your Posts</a>
+        <div class="hello">Hello, @User.Identity.Name &nbsp|&nbsp <a href="@Url.Action("Logout","Account")">Log Out</a>
+            &nbsp|&nbsp <a href="@Url.Action("Index", "Posts")">Your Posts</a>
         </div>
     }
     else

@@ -4,8 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
+<br /><br /><br />
+<h2>Your Posts</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -34,7 +35,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td class="twah">
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
@@ -58,6 +59,7 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
         </td>
     </tr>
+    
 }
 
 </table>

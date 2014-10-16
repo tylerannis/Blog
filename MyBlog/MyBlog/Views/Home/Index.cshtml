@@ -1,8 +1,58 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<MyBlog.Models.Post>
+@{
+    ViewBag.Title = "My Blog about Life";
 }
 
-<h2>Index</h2>
 
+@foreach (var item in Model)
+{
+<section class="post">
+	<div class="postInfo">
+		<img class="thumb" src="@item.Author.ImageUrl" />
+		<span class="title">@item.Title</span><br />
+		<small class="small">By <a href="/author/AuthorName">@item.Author.Name</a> on @item.DateCreated.GetValueOrDefault().ToShortDateString()</small>
+	</div>
+	<div class="postContent">
+		
+		<img src="@item.ImageUrl" />
+		
+		@item.Body
 
+	</div>
+	<div class="likebutton">
+		
+		<span class="like" data-postId="@item.PostID">
+			@item.Likes Likes
+		</span> 
+		
+	</div>
+
+	<div class="comments">
+		<span class="showComments">
+		<span>Show</span> @item.Comments.Count() comments
+		</span>
+		
+		<div class="commentsDiv">
+            @foreach (var comment in item.Comments)
+            {
+                @Html.Partial("Comment", comment)
+            
+            }
+			
+			
+			<form action="@Url.Action("AddComment", "Home")" method="post">
+				<label for="Name">Your Name</label>
+				<input type="text" name="author" class="commentAuthor" />
+				<br />
+				<label for="body">Comment</label>
+				<textarea name="body" class="commentBody"></textarea>
+				<br />
+                @*give the comment a postID so that it knows which comment goes where*@
+                <input type="hidden" name="PostID" value="@item.PostID" />
+				<input type="submit" value="Add Comment" />
+			</form>
+		</div>
+
+    </section>
+}
 

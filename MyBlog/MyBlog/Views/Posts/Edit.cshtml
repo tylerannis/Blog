@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-<form action="~/Posts/Edit" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("Edit", "Posts")" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -31,14 +31,7 @@
             @Html.ValidationMessageFor(model => model.Body)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateCreated)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateCreated)
-            @Html.ValidationMessageFor(model => model.DateCreated)
-        </div>
-
+        
         <div class="editor-label">
             @Html.LabelFor(model => model.ImageUrl)
         </div>
@@ -47,13 +40,7 @@
             @Html.ValidationMessageFor(model => model.ImageUrl)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Likes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Likes)
-            @Html.ValidationMessageFor(model => model.Likes)
-        </div>
+       
 
         <div class="editor-label">
             @Html.LabelFor(model => model.AuthorID, "Author")

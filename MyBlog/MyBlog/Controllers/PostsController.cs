@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyBlog.Models;
-
+using System.IO;
 namespace MyBlog.Controllers
 {
     public class PostsController : Controller
@@ -49,10 +49,23 @@ namespace MyBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Post post)
+        public ActionResult Create(Post post, HttpPostedFileBase ImageUrl)
         {
             if (ModelState.IsValid)
             {
+                if (ImageUrl != null)
+                {
+                    //Guid characters used to make sure the file name is not repeated so that the file  is not overwritten
+                string fileName = Guid.NewGuid().ToString().Substring(0, 6) + ImageUrl.FileName;
+                //specify the path to save the file to
+                string path = Path.Combine(Server.MapPath("~/content/"), fileName);
+                //Save the file
+                ImageUrl.SaveAs(path);
+                //update our post object with the image
+                post.ImageUrl = "/content/" + fileName;
+                }
+                post.Likes = 0;
+                post.DateCreated = DateTime.Now;
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -81,10 +94,21 @@ namespace MyBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(Post post, HttpPostedFileBase ImageUrl)
         {
             if (ModelState.IsValid)
             {
+                if (ImageUrl != null)
+                {
+                    //Guid characters used to make sure the file name is not repeated so that the file  is not overwritten
+                    string fileName = Guid.NewGuid().ToString().Substring(0, 6) + ImageUrl.FileName;
+                    //specify the path to save the file to
+                    string path = Path.Combine(Server.MapPath("~/content/"), fileName);
+                    //Save the file
+                    ImageUrl.SaveAs(path);
+                    //update our post object with the image
+                    post.ImageUrl = "/content/" + fileName;
+                }
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
